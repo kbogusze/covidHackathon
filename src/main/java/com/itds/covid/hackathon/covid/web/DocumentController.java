@@ -20,21 +20,15 @@ public class DocumentController {
     private DocumentService service;
 
     @GetMapping("/documents/{id}")
-    public String getPhoto(@PathVariable String id, Model model) {
-        Document photo = service.get(id);
-        model.addAttribute("title", photo.getTitle());
-        model.addAttribute("image", Base64.getEncoder().encodeToString(photo.getContent().getData()));
-        return "photos";
-    }
-
-    @GetMapping("/documents/deal/{id}")
-    public String uploadPhoto(Model model) {
-        model.addAttribute("message", "hello");
-        return "uploadPhoto";
+    public Document getDocument(@PathVariable String id, Model model) {
+        Document document = service.get(id);
+        model.addAttribute("title", document.getTitle());
+        model.addAttribute("image", Base64.getEncoder().encodeToString(document.getContent().getData()));
+        return document;
     }
 
     @PostMapping("/documents/add")
-    public String addPhoto(@RequestParam("title") String title,@RequestParam("dealID") String dealID, @RequestParam("content") MultipartFile image, Model model) throws IOException {
+    public String addDocument(@RequestParam("title") String title,@RequestParam("dealID") String dealID, @RequestParam("content") MultipartFile image) throws IOException {
         String id = service.add(title,dealID, image);
         return "redirect:/photos/" + id;
     }
