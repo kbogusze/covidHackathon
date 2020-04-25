@@ -5,25 +5,35 @@ import com.itds.covid.hackathon.covid.models.DocumentRepository;
 import org.bson.BsonBinarySubType;
 import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Base64;
+import java.util.Optional;
 
-@Controller
+@RestController
 public class DocumentController {
 
     @Autowired
     private DocumentRepository repository;
 
+    public DocumentController() {
+        System.out.println("Document Controller instantiated!");
+    }
+
     @GetMapping("/documents/{id}")
-    public Document getDocument(@PathVariable String id, Model model) {
-        return repository.findById(id).get();
+    public ResponseEntity<Document> getDocument(@PathVariable String id) {
+        Optional<Document> document = repository.findById(id);
+        if (document.isPresent()){
+//            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
+            return new ResponseEntity<>(document.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
     }
 
     @PostMapping("/documents")
