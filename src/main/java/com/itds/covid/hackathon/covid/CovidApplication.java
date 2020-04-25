@@ -1,18 +1,17 @@
 package com.itds.covid.hackathon.covid;
 
-import com.itds.covid.hackathon.covid.models.DealRepository;
-import com.itds.covid.hackathon.covid.models.Person;
-import com.itds.covid.hackathon.covid.models.PersonRepository;
+import com.itds.covid.hackathon.covid.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class CovidApplication implements CommandLineRunner {
 
 	@Autowired
-	private PersonRepository repository;
+	private UserRepository repository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CovidApplication.class, args);
@@ -22,16 +21,16 @@ public class CovidApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 	//code to test connection with DB
 
-//		Person person = new Person();
-//		person.setFirstName("Krzysztof");
-//		person.setLastName("Bogu");
+//		User person = new User();
+//		person.setUsername("bogu");
+//		person.setPassword( new BCryptPasswordEncoder().encode("haslo"));
 //		repository.insert(person);
 
 		// fetch all customers
-		for (Person customer : repository.findAll()) {
-			System.out.println(customer);
-			System.out.println(customer.getFirstName());
-		}
+//		for (Person customer : repository.findAll()) {
+//			System.out.println(customer);
+//			System.out.println(customer.getFirstName());
+//		}
 	}
 
 
