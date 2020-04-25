@@ -13,11 +13,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/persons")
 public class PersonController {
+	
+	public PersonController() {
+		System.out.println("Person Controller instantiated!");
+	}
 
     @Autowired
     private PersonRepository repository;
 
-    @GetMapping("/")
+    @GetMapping("/{id}")
     public List<Person> getAllPersons(@PathVariable String id) {
         return repository.findAll();
     }
