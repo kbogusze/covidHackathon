@@ -22,11 +22,13 @@ public class DealController {
         @Autowired
         private DealRepository repository;
 
+        @CrossOrigin
         @GetMapping("")
         public List<Deal> getAll() {
             return repository.findAll();
         }
 
+        @CrossOrigin
         @GetMapping("/{id}")
         public ResponseEntity<Deal> get(@PathVariable String id) {
             Optional<Deal> deal = repository.findById(id);
@@ -37,13 +39,12 @@ public class DealController {
             }
         }
 
+        @CrossOrigin
         @PostMapping(path = "", consumes = "application/json", produces = "application/json")
         public ResponseEntity<Deal> add(@RequestBody Deal object) {
             Deal insertedObject = repository.insert(object);
             return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
         }
-
-
 
 
 }

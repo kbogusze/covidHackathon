@@ -25,6 +25,7 @@ public class DocumentController {
         System.out.println("Document Controller instantiated!");
     }
 
+    @CrossOrigin
     @GetMapping("/documents/{id}")
     public ResponseEntity<Document> getDocument(@PathVariable String id) {
         Optional<Document> document = repository.findById(id);
@@ -36,6 +37,7 @@ public class DocumentController {
         }
     }
 
+    @CrossOrigin
     @PostMapping("/documents")
     public String addDocument(@RequestParam("title") String title,@RequestParam("dealID") String dealID, @RequestParam("content") MultipartFile file) throws IOException {
         Document document = new Document();

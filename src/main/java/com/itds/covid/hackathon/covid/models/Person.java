@@ -84,4 +84,12 @@ public class Person {
     public void setCardIdNumber(String cardIdNumber) {
         this.cardIdNumber = cardIdNumber;
     }
+
+	@Override
+	public String toString() {
+		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
+				+ phoneNumber + ", email=" + email + ", TermConsent=" + TermConsent + ", ContactConsent="
+				+ ContactConsent + ", cardIdNumber=" + cardIdNumber + "]";
+	}
+    
 }

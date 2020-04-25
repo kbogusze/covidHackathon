@@ -21,11 +21,13 @@ public class PersonController {
     @Autowired
     private PersonRepository repository;
 
+    @CrossOrigin
     @GetMapping("")
     public List<Person> getAll() {
         return repository.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Person> get(@PathVariable String id) {
         Optional<Person> deal = repository.findById(id);
@@ -36,10 +38,13 @@ public class PersonController {
         }
     }
 
+    @CrossOrigin
     @PostMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Person> add(@RequestBody Person object) {
+    	System.out.println("Person posted: " + object);
         Person insertedObject = repository.insert(object);
         return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
     }
+    
 }
 
