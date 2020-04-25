@@ -1,7 +1,7 @@
 package com.itds.covid.hackathon.covid.web;
 
-import com.itds.covid.hackathon.covid.models.Person;
-import com.itds.covid.hackathon.covid.models.PersonRepository;
+import com.itds.covid.hackathon.covid.models.Company;
+import com.itds.covid.hackathon.covid.models.CompanyRepository;
 import com.itds.covid.hackathon.covid.models.User;
 import com.itds.covid.hackathon.covid.models.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +14,24 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/persons")
-public class PersonController {
+public class CompanyController {
 	
-	public PersonController() {
+	public CompanyController() {
 		System.out.println("Person Controller instantiated!");
 	}
 
     @Autowired
-    private PersonRepository repository;
+    private CompanyRepository repository;
 
     @Autowired
     private UserRepository userRepository;
 
     @CrossOrigin
     @GetMapping("")
-    public ResponseEntity<Person> get(Principal principal) {
+    public ResponseEntity<Company> get(Principal principal) {
         User user = userRepository.findByUsername(principal.getName());
         if ( user != null ) {
-            Optional<Person> byUserId = repository.findByUserId(user.getId());
+            Optional<Company> byUserId = repository.findByUserId(user.getId());
             if (byUserId.isPresent()) {
                 return new ResponseEntity<>(byUserId.get(), HttpStatus.OK);
             } else
@@ -46,8 +46,8 @@ public class PersonController {
 
     @CrossOrigin
     @GetMapping("/{id}")
-    public ResponseEntity<Person> getByID(@PathVariable String id) {
-        Optional<Person> deal = repository.findById(id);
+    public ResponseEntity<Company> getByID(@PathVariable String id) {
+        Optional<Company> deal = repository.findById(id);
         if (deal.isPresent()) {
             return new ResponseEntity<>(deal.get(), HttpStatus.OK);
         } else {
@@ -57,13 +57,13 @@ public class PersonController {
 
     @CrossOrigin
     @PostMapping(path = "", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Person> add(Principal principal, @RequestBody Person object) {
+    public ResponseEntity<Company> add(Principal principal, @RequestBody Company object) {
 
         User user = userRepository.findByUsername(principal.getName());
         if ( user != null && !repository.findByUserId(user.getId()).isPresent()) {
             object.setUserId(user.getId());
             System.out.println("Person posted: " + object);
-            Person insertedObject = repository.insert(object);
+            Company insertedObject = repository.insert(object);
             return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
         } else {
             return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);

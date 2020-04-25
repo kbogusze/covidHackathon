@@ -27,7 +27,7 @@ public class DealController {
         private UserRepository userRepository;
 
         @Autowired
-        private PersonRepository personRepository;
+        private CompanyRepository personRepository;
 
         @CrossOrigin
         @GetMapping("")
@@ -52,15 +52,11 @@ public class DealController {
 
             User user = userRepository.findByUsername(principal.getName());
             if ( user != null ) {
-                Optional<Person> person = personRepository.findByUserId(user.getId());
-                if (person.isPresent()) {
-                    object.setCustomerId(person.get().getId());
+                    object.setUserId(user.getId());
                     System.out.println("Person posted: " + object);
                     Deal insertedObject = repository.insert(object);
                     return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
-                } else {
-                    return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-                }
+
             } else {
                 return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
             }

@@ -3,18 +3,12 @@ package com.itds.covid.hackathon.covid.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
-public class Person {
+public class Company {
 
     @Id
     public String id;
     @Indexed
     public String userId;
-
-    public String userType;
-    public String firstName;
-    public String lastName;
-    public String address;
-    public String phoneNumber;
 
     public String companyName;
     public String activityCategory;
@@ -26,12 +20,7 @@ public class Person {
     public String companyPhone;
     public String companyWebsite;
 
-    Boolean TermConsent;
-    Boolean ContactConsent;
-
-    String cardIdNumber;
-
-    public Person() {
+    public Company() {
     }
 
     public String getId() {
@@ -42,41 +31,12 @@ public class Person {
         this.id = id;
     }
 
-    //applicant or guarantor
-    public String getUserType() {
-        return userType;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getCompanyName() {
@@ -141,42 +101,5 @@ public class Person {
 
     public void setCompanyWebsite(String companyWebsite) {
         this.companyWebsite = companyWebsite;
-    }
-
-    public Boolean getTermConsent() {
-        return TermConsent;
-    }
-
-    public void setTermConsent(Boolean termConsent) {
-        TermConsent = termConsent;
-    }
-
-    public Boolean getContactConsent() {
-        return ContactConsent;
-    }
-
-    public void setContactConsent(Boolean contactConsent) {
-        ContactConsent = contactConsent;
-    }
-
-    public String getCardIdNumber() {
-        return cardIdNumber;
-    }
-
-    public void setCardIdNumber(String cardIdNumber) {
-        this.cardIdNumber = cardIdNumber;
-    }
-
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 }
