@@ -1,11 +1,10 @@
 package com.itds.covid.hackathon.covid;
 
-import com.itds.covid.hackathon.covid.models.*;
+import com.itds.covid.hackathon.covid.models.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class CovidApplication implements CommandLineRunner {

@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface DealRepository extends MongoRepository<Deal, String> {
 
-    List<Deal> findByCustomerId(String customerId);
+    List<Deal> findByUserId(String userId);
 }

@@ -64,7 +64,7 @@ public class DealController {
 
         @GetMapping("/customer/{id}")
         public ResponseEntity<?> getDealsByCustomer(@PathVariable String id) {
-            List<Deal> deal = repository.findByCustomerId(id);
+            List<Deal> deal = repository.findByUserId(id);
             if (!CollectionUtils.isEmpty(deal)) {
                 return new ResponseEntity<>(deal, HttpStatus.OK);
             } else {
