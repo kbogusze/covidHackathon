@@ -34,6 +34,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }).and()
                 .authorizeRequests()
                 .antMatchers( "/users").permitAll()
+                .antMatchers( "/dealview/**").permitAll()
                 .anyRequest().authenticated()
                 .and().httpBasic()
                 .and().sessionManagement().disable();

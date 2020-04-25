@@ -7,12 +7,10 @@ import org.bson.types.Binary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Optional;
 
 @RestController
@@ -29,18 +27,6 @@ public class DocumentController {
     @GetMapping("/documents/{id}")
     public ResponseEntity<Document> getDocument(@PathVariable String id) {
         Optional<Document> document = repository.findById(id);
-        if (document.isPresent()){
-//            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
-            return new ResponseEntity<>(document.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
-        }
-    }
-
-    @CrossOrigin
-    @GetMapping("/documents/deal/{id}")
-    public ResponseEntity<Document> getDocumentByDeal(@PathVariable String id) {
-        Optional<Document> document = repository.findByDealId(id);
         if (document.isPresent()){
 //            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
             return new ResponseEntity<>(document.get(), HttpStatus.OK);
