@@ -31,9 +31,9 @@ public class PersonController {
     public ResponseEntity<Person> get(Principal principal) {
         User user = userRepository.findByUsername(principal.getName());
         if ( user != null ) {
-            Person byUserId = repository.findByUserId(user.getId());
-            if (byUserId != null ) {
-                return new ResponseEntity<>(byUserId, HttpStatus.OK);
+            Optional<Person> byUserId = repository.findByUserId(user.getId());
+            if (byUserId.isPresent()) {
+                return new ResponseEntity<>(byUserId.get(), HttpStatus.OK);
             } else
             {
                 return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
@@ -60,7 +60,7 @@ public class PersonController {
     public ResponseEntity<Person> add(Principal principal, @RequestBody Person object) {
 
         User user = userRepository.findByUsername(principal.getName());
-        if ( user != null ) {
+        if ( user != null && !repository.findByUserId(user.getId()).isPresent()) {
             object.setUserId(user.getId());
             System.out.println("Person posted: " + object);
             Person insertedObject = repository.insert(object);

@@ -52,11 +52,15 @@ public class DealController {
 
             User user = userRepository.findByUsername(principal.getName());
             if ( user != null ) {
-                Person person = personRepository.findByUserId(user.getId());
-                object.setCustomerId(person.getId());
-                System.out.println("Person posted: " + object);
-                Deal insertedObject = repository.insert(object);
-                return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
+                Optional<Person> person = personRepository.findByUserId(user.getId());
+                if (person.isPresent()) {
+                    object.setCustomerId(person.get().getId());
+                    System.out.println("Person posted: " + object);
+                    Deal insertedObject = repository.insert(object);
+                    return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
+                } else {
+                    return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+                }
             } else {
                 return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
             }
