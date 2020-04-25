@@ -10,52 +10,91 @@ public class Deal {
     @Id
     public String id;
     @Indexed
-    String customerId;
 
+    public String customerId;
     DealStatus status;
 
-    String title;
+    public String collateralTitle;
+    public String dueDate;
+    public BigDecimal requestedCollateralAmount;
+    public String requestDescription;
+    public String personalDataAcceptance;
+    public String termConditions;
+    public String marketingPurposes;
 
-    String description;
-
-    String category;
-
-    String condition;
-
-    BigDecimal value;
-
-    Integer numberOfInvestors;
+    public String description;
+    public String category;
+    public String condition;
+    public BigDecimal value;
+    public Integer numberOfInvestors;
 
 
 
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
     }
 
     public DealStatus getStatus() {
         return status;
     }
-
     public void setStatus(DealStatus status) {
         this.status = status;
     }
 
-    public String getTitle() {
-        return title;
+    public String getCollateralTitle() {
+        return collateralTitle;
+    }
+    public void setCollateralTitle(String collateralTitle) {
+        this.collateralTitle = collateralTitle;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getDueDate() {
+        return dueDate;
     }
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public BigDecimal getRequestedCollateralAmount() {
+        return requestedCollateralAmount;
+    }
+    public void setRequestedCollateralAmount(BigDecimal requestedCollateralAmount) { this.requestedCollateralAmount = requestedCollateralAmount; }
+
+    public String getRequestDescription() {
+        return requestDescription;
+    }
+    public void setRequestDescription(String requestDescription) {
+        this.dueDate = requestDescription;
+    }
+
+    public String getPersonalDataAcceptance() {
+        return personalDataAcceptance;
+    }
+    public void setPersonalDataAcceptance(String personalDataAcceptance) { this.personalDataAcceptance = personalDataAcceptance; }
+
+    public String getTermConditions() {
+        return termConditions;
+    }
+    public void setTermConditions(String termConditions) { this.termConditions = termConditions; }
+
+    public String getMarketingPurposes() {
+        return marketingPurposes;
+    }
+    public void setMarketingPurposes(String marketingPurposes) { this.marketingPurposes = marketingPurposes; }
 
     public String getDescription() {
         return description;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -63,7 +102,6 @@ public class Deal {
     public String getCategory() {
         return category;
     }
-
     public void setCategory(String category) {
         this.category = category;
     }
@@ -71,7 +109,6 @@ public class Deal {
     public String getCondition() {
         return condition;
     }
-
     public void setCondition(String condition) {
         this.condition = condition;
     }
@@ -79,7 +116,6 @@ public class Deal {
     public BigDecimal getValue() {
         return value;
     }
-
     public void setValue(BigDecimal value) {
         this.value = value;
     }
@@ -87,16 +123,9 @@ public class Deal {
     public Integer getNumberOfInvestors() {
         return numberOfInvestors;
     }
-
     public void setNumberOfInvestors(Integer numberOfInvestors) {
         this.numberOfInvestors = numberOfInvestors;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
 }
