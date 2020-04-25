@@ -13,7 +13,7 @@ import java.security.Principal;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/persons")
+@RequestMapping("/company")
 public class CompanyController {
 	
 	public CompanyController() {
