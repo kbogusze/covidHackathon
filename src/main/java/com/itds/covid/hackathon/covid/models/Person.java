@@ -1,15 +1,15 @@
 package com.itds.covid.hackathon.covid.models;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 public class Person {
 
     @Id
     public String id;
+    @Indexed
+    public String userId;
 
-    public String login;
-    public String password;
-    public String email;
     public String userType;
     public String firstName;
     public String lastName;
@@ -42,37 +42,9 @@ public class Person {
         this.id = id;
     }
 
-    public String getlogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.login = password;
-    }
-
     //applicant or guarantor
     public String getUserType() {
         return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.login = userType;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getFirstName() {
@@ -195,11 +167,16 @@ public class Person {
         this.cardIdNumber = cardIdNumber;
     }
 
-	@Override
-	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", email=" + email + ", TermConsent=" + TermConsent + ", ContactConsent="
-				+ ContactConsent + ", cardIdNumber=" + cardIdNumber + "]";
-	}
-    
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 }

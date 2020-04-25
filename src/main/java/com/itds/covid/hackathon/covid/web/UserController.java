@@ -1,7 +1,5 @@
 package com.itds.covid.hackathon.covid.web;
 
-import com.itds.covid.hackathon.covid.models.Person;
-import com.itds.covid.hackathon.covid.models.PersonRepository;
 import com.itds.covid.hackathon.covid.models.User;
 import com.itds.covid.hackathon.covid.models.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
