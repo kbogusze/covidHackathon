@@ -38,6 +38,18 @@ public class DocumentController {
     }
 
     @CrossOrigin
+    @GetMapping("/documents/deal/{id}")
+    public ResponseEntity<Document> getDocumentByDeal(@PathVariable String id) {
+        Optional<Document> document = repository.findByDealId(id);
+        if (document.isPresent()){
+//            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
+            return new ResponseEntity<>(document.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @CrossOrigin
     @PostMapping("/documents")
     public String addDocument(@RequestParam("title") String title,@RequestParam("dealID") String dealID, @RequestParam("content") MultipartFile file) throws IOException {
         Document document = new Document();
