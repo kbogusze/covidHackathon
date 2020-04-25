@@ -26,7 +26,7 @@ public class DocumentController {
         return repository.findById(id).get();
     }
 
-    @PostMapping("/documents/add")
+    @PostMapping("/documents")
     public String addDocument(@RequestParam("title") String title,@RequestParam("dealID") String dealID, @RequestParam("content") MultipartFile file) throws IOException {
         Document document = new Document();
         document.setDealID(dealID);
