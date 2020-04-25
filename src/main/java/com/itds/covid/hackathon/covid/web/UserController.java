@@ -18,9 +18,14 @@ public class UserController {
     @CrossOrigin
     @PostMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> add(@RequestBody User object) {
-        object.setPassword( new BCryptPasswordEncoder().encode(object.getPassword()));
-        User insertedObject = repository.insert(object);
-        return new ResponseEntity<>("", HttpStatus.CREATED);
+        if (repository.findByUsername(object.getUsername()) == null) {
+            object.setPassword(new BCryptPasswordEncoder().encode(object.getPassword()));
+            User insertedObject = repository.save(object);
+            return new ResponseEntity<>("", HttpStatus.CREATED);
+        } else
+        {
+            return new ResponseEntity<>("Username exist", HttpStatus.CONFLICT);
+        }
     }
 
 
