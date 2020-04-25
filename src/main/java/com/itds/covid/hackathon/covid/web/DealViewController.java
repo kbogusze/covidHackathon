@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class DealViewController {
@@ -26,17 +25,17 @@ public class DealViewController {
 
     @CrossOrigin
     @GetMapping("/dealview/deals")
-    public List<Deal> getAll() {
+    public List<Deal> getAllDeals() {
         return dealRepository.findAll();
     }
 
     @CrossOrigin
     @GetMapping("/dealview/document/deal/{id}")
-    public ResponseEntity<Document> getDocumentByDeal(@PathVariable String id) {
-        Optional<Document> document = documentRepository.findByDealID(id);
-        if (document.isPresent()){
+    public ResponseEntity<List<Document>> getDocumentByDeal(@PathVariable String id) {
+        List<Document> document = documentRepository.findByDealID(id);
+        if (document != null){
 //            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
-            return new ResponseEntity<>(document.get(), HttpStatus.OK);
+            return new ResponseEntity<>(document, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }

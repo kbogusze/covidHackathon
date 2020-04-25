@@ -60,7 +60,7 @@ public class CompanyController {
     public ResponseEntity<Company> add(Principal principal, @RequestBody Company object) {
 
         User user = userRepository.findByUsername(principal.getName());
-        if ( user != null && !repository.findByUserId(user.getId()).isPresent()) {
+        if ( user != null ) {
             object.setUserId(user.getId());
             System.out.println("Person posted: " + object);
             Company insertedObject = repository.insert(object);
