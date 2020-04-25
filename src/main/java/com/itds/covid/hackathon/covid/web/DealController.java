@@ -5,6 +5,7 @@ import com.itds.covid.hackathon.covid.models.DealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -46,5 +47,14 @@ public class DealController {
             return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
         }
 
+        @GetMapping("/customer/{id}")
+        public ResponseEntity<?> getDealsByCustomer(@PathVariable String id) {
+            List<Deal> deal = repository.findByCustomerId(id);
+            if (!CollectionUtils.isEmpty(deal)) {
+                return new ResponseEntity<>(deal, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            }
+        }
 
 }
