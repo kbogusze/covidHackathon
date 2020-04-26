@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -18,6 +19,28 @@ public class UserController {
     @CrossOrigin
     @PostMapping(path = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> add(@RequestBody User object) {
+        if (StringUtils.isEmpty(object.getPassword()))
+        {
+            return new ResponseEntity<>("Password must be filled", HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isEmpty(object.getUsername()))
+        {
+            return new ResponseEntity<>("Username must be filled", HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isEmpty(object.getEmail()))
+        {
+            return new ResponseEntity<>("Email must be filled", HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isEmpty(object.getFirstName()))
+        {
+            return new ResponseEntity<>("First name must be filled", HttpStatus.BAD_REQUEST);
+        }
+        if (StringUtils.isEmpty(object.getLastName()))
+        {
+            return new ResponseEntity<>("Last name must be filled", HttpStatus.BAD_REQUEST);
+        }
+
+
         if (repository.findByUsername(object.getUsername()) == null) {
             object.setPassword(new BCryptPasswordEncoder().encode(object.getPassword()));
             User insertedObject = repository.save(object);

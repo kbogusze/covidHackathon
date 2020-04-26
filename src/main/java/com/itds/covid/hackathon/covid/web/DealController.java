@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -29,6 +30,9 @@ public class DealController {
         @Autowired
         private CompanyRepository personRepository;
 
+        @Autowired
+        private DocumentRepository documentRepository;
+
         @CrossOrigin
         @GetMapping("")
         public List<Deal> getAll() {
@@ -48,13 +52,30 @@ public class DealController {
 
         @CrossOrigin
         @PostMapping(path = "", consumes = "application/json", produces = "application/json")
-        public ResponseEntity<Deal> add(Principal principal, @RequestBody Deal object) {
+        public ResponseEntity<?> add(Principal principal, @RequestBody Deal object) {
+            if (StringUtils.isEmpty(object.getCollateralTitle()))
+            {
+                return new ResponseEntity<>("Title can not be null", HttpStatus.BAD_REQUEST);
+            }
+            if (StringUtils.isEmpty(object.getRequestDescription()))
+            {
+                return new ResponseEntity<>("Description must be filled", HttpStatus.BAD_REQUEST);
+            }
 
             User user = userRepository.findByUsername(principal.getName());
             if ( user != null ) {
                     object.setUserId(user.getId());
                     System.out.println("Person posted: " + object);
                     Deal insertedObject = repository.insert(object);
+
+                    if (!StringUtils.isEmpty(object.getMainPictureId())){
+                        Optional<Document> byId = documentRepository.findById(object.getMainPictureId());
+                        if (byId.isPresent()){
+                            byId.get().setDealID(object.getMainPictureId());
+                            documentRepository.save(byId.get());
+                        }
+                    }
+
                     return new ResponseEntity<>(insertedObject, HttpStatus.CREATED);
 
             } else {

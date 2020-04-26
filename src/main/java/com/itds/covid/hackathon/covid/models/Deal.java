@@ -5,12 +5,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Deal {
     @Id
     public String id;
     @Indexed
     public String userId;
+    @Indexed
+    public String mainPictureId;
 
     DealStatus status;
 
@@ -128,5 +131,13 @@ public class Deal {
 
     public void setNumberOfInvestors(Integer numberOfInvestors) {
         this.numberOfInvestors = numberOfInvestors;
+    }
+
+    public String getMainPictureId() {
+        return mainPictureId;
+    }
+
+    public void setMainPictureId(String mainPictureId) {
+        this.mainPictureId = mainPictureId;
     }
 }

@@ -37,7 +37,7 @@ public class DocumentController {
 
     @CrossOrigin
     @PostMapping("/documents")
-    public String addDocument(@RequestParam("title") String title,@RequestParam("dealID") String dealID, @RequestParam("content") MultipartFile file) throws IOException {
+    public String addDocument(@RequestParam("title") String title,@RequestParam(value ="dealID" , required=false) String dealID, @RequestParam("content") MultipartFile file) throws IOException {
         Document document = new Document();
         document.setDealID(dealID);
         document.setTitle(title);

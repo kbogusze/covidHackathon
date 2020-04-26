@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class DealViewController {
@@ -29,16 +30,28 @@ public class DealViewController {
         return dealRepository.findAll();
     }
 
+//    @CrossOrigin
+//    @GetMapping("/dealview/document/deal/{id}")
+//    public ResponseEntity<List<Document>> getDocumentByDeal(@PathVariable String id) {
+//        List<Document> document = documentRepository.findByDealID(id);
+//        if (document != null){
+////            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
+//            return new ResponseEntity<>(document, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+//        }
+//    }
+
+
     @CrossOrigin
-    @GetMapping("/dealview/document/deal/{id}")
-    public ResponseEntity<List<Document>> getDocumentByDeal(@PathVariable String id) {
-        List<Document> document = documentRepository.findByDealID(id);
-        if (document != null){
+    @GetMapping("/dealview/mainpicture/{id}")
+    public ResponseEntity<Document> getMainPicture(@PathVariable String id) {
+        Optional<Document> document = documentRepository.findById(id);
+        if (document.isPresent()){
 //            document.get().setContent(Base64.getEncoder().encodeToString(document.get().getContent().getData()));
-            return new ResponseEntity<>(document, HttpStatus.OK);
+            return new ResponseEntity<>(document.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
     }
-
 }
