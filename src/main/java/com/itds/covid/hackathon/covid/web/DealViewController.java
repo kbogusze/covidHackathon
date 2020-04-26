@@ -86,6 +86,7 @@ public class DealViewController {
         Optional<Deal> byId = dealRepository.findById(id);
 
         if (byId.isPresent()){
+            dealDetailProxy.setDeal(byId.get());
             String userId = byId.get().getUserId();
             Optional<User> byId1 = userRepository.findById(userId);
             if (byId1.isPresent()){

@@ -61,7 +61,9 @@ public class DealController {
             {
                 return new ResponseEntity<>("Description must be filled", HttpStatus.BAD_REQUEST);
             }
-
+//            Integer random = (int)(Math.random() * ((100 - 1) + 1)) + 1;
+//            object.setCollectedValue(random);
+            object.setCollectedValue(0);
             User user = userRepository.findByUsername(principal.getName());
             if ( user != null ) {
                     object.setUserId(user.getId());

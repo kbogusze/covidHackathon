@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 
 import java.math.BigDecimal;
-import java.util.Date;
 
 public class Deal {
     @Id
@@ -29,6 +28,8 @@ public class Deal {
     public String category;
     public BigDecimal value;
     public Integer numberOfInvestors;
+
+    public Integer collectedValue;
 
     public String getId() {
         return id;
@@ -148,5 +149,13 @@ public class Deal {
 
     public void setMainPictureName(String mainPictureName) {
         this.mainPictureName = mainPictureName;
+    }
+
+    public Integer getCollectedValue() {
+        return collectedValue;
+    }
+
+    public void setCollectedValue(Integer collectedValue) {
+        this.collectedValue = collectedValue;
     }
 }
