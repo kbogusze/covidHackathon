@@ -71,7 +71,7 @@ public class DealController {
                     if (!StringUtils.isEmpty(object.getMainPictureId())){
                         Optional<Document> byId = documentRepository.findById(object.getMainPictureId());
                         if (byId.isPresent()){
-                            byId.get().setDealID(object.getMainPictureId());
+                            byId.get().setDealID(insertedObject.getId());
                             documentRepository.save(byId.get());
                         }
                     }
