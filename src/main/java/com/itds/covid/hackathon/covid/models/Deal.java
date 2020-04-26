@@ -14,6 +14,7 @@ public class Deal {
     public String userId;
     @Indexed
     public String mainPictureId;
+    public String mainPictureName;
 
     DealStatus status;
 
@@ -139,5 +140,13 @@ public class Deal {
 
     public void setMainPictureId(String mainPictureId) {
         this.mainPictureId = mainPictureId;
+    }
+
+    public String getMainPictureName() {
+        return mainPictureName;
+    }
+
+    public void setMainPictureName(String mainPictureName) {
+        this.mainPictureName = mainPictureName;
     }
 }

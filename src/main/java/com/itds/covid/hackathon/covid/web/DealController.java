@@ -73,6 +73,8 @@ public class DealController {
                         if (byId.isPresent()){
                             byId.get().setDealID(insertedObject.getId());
                             documentRepository.save(byId.get());
+                            insertedObject.setMainPictureName(byId.get().getTitle());
+                            repository.save(object);
                         }
                     }
 

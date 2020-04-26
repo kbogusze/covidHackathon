@@ -1,14 +1,17 @@
 package com.itds.covid.hackathon.covid.web;
 
 import com.itds.covid.hackathon.covid.models.*;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,6 +59,23 @@ public class DealViewController {
         } else {
             return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
         }
+    }
+
+    @CrossOrigin
+    @RequestMapping(value ="/dealview/mainpicture/stream/{id}/{imagename}"  ,
+            produces = {"image/png", "image/jpeg"},
+            method = RequestMethod.GET
+    )
+    public @ResponseBody byte[] getImage(@PathVariable String id , @PathVariable String imagename) throws IOException {
+        Optional<Document> document = documentRepository.findById(id);
+        if (document.isPresent()){
+//            byte[] byteArray = Base64.getEncoder().encode(document.get().getContent().getData());
+            InputStream in = new ByteArrayInputStream(document.get().getContent().getData());
+            return IOUtils.toByteArray(in);
+        } else {
+            return null;
+        }
+
     }
 
     @CrossOrigin
