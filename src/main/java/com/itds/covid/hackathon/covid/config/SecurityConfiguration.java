@@ -27,7 +27,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
         .cors().configurationSource(request -> {
             CorsConfiguration cors = new CorsConfiguration();
-            cors.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://127.0.0.1:80", "http://example.com", "http://localhost:3000"));
+            cors.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://127.0.0.1:80", "http://example.com", "http://localhost:3000", 
+            		"http://92.222.77.103:3000"));
             cors.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "OPTIONS"));
             cors.setAllowedHeaders(Arrays.asList("*"));
             return cors;
